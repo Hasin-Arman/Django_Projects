@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if books %}
+<table class="table table-bordered w-75 m-auto mt-4">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Book Name</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{book.id}}</td>
+            <td><a href="{% url 'details' book.id %}">{{book.book_name}}</a></td>
+          </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <h1 class="text-center ">No data availabe</h1>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% if messages %}
+        {% for m in messages %}
+            <small {% if m.tags %} class="{{m.tags}}" {% endif %}>{{m}}</small>
+        {% endfor %}
+    {% endif %}
+    <form method="post" class="m-auto w-50 mt-3" novalidate>
+        {% csrf_token %}
+        {% comment %} {{form| crispy }} {% endcomment %}
+        {% if form.non_field_errors %}
+            {% for er in form.non_field_errors %}
+            <p class="bg-danger text-white p-3">{{er}}</p>
+            {% endfor %}
+        {% endif %}
+
+        {% for fm in form %}
+            {{fm.label_tag}}
+            {{fm}}
+            <p class="text-danger">{{fm.errors|striptags}}</p>
+            <br>
+            <br>
+        {% endfor %}
+        <button class="btn btn-info" type="submit">submit</button>
+    </form>
+{% endblock  %}
