@@ -24,7 +24,7 @@ def user_login(request):
         password = request.POST.get('password')
         user=authenticate(username=username,password=password)
         cart_id=Cart.objects.filter(cart_id=get_or_create_session(request)).exists()
-        cart=Cart.objects.get(cart_id=get_or_create_session(request))
+        # cart=Cart.objects.get(cart_id=get_or_create_session(request))
         if cart_id:
             cart_item=cartItem.objects.filter(cart=cart)
             for item in cart_item:
